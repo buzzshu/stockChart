@@ -1,0 +1,167 @@
+﻿@model IEnumerable<chart0302.Models.stocks>
+
+@{
+    ViewBag.Title = ViewBag.id;
+}
+
+<style>
+    .con{
+        width:500px;
+    }
+</style>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.stock.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+
+<body>
+    <h2>@ViewBag.id</h2>
+
+    @*<div id="chartContainer" style="height: 400px; width: 100%;"></div>*@
+
+<div class="con">
+    <canvas id="myChart"></canvas>
+</div>
+    
+</body>
+<script type="text/javascript">
+    var model = @Html.Raw(Json.Encode(Model));
+    var stockPrice = [];
+    for (var i = 0; i < model.length; i++) {
+        // stockPrice.push([i, model[i].endPrice])
+        var date = model[i].stockDate.substring(0, 4) + "-" + model[i].stockDate.substring(4, 6) + "-" + model[i].stockDate.substring(6, 8);
+        stockPrice.push([new Date(date), model[i].endPrice])
+    }
+
+    console.log(stockPrice)
+
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [
+                {
+                    label: 'EndPrice',
+                    data: stockPrice,
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    // interpolate: true,
+                    lineTension: 0,
+                    showLine: true,
+                    pointRadius: 0
+                }
+            ]
+        },
+        options: {
+            scales: {
+                x: {
+                    ticks: {
+                        // Include a dollar sign in the ticks
+                        callback: function (label, index, labels) {
+                            return moment(label).format("YYYY/MM/DD");
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+
+
+
+    @*window.onload = function () {
+        var dataPoints1 = [], dataPoints2 = [], dataPoints3 = [];
+        var stockChart = new CanvasJS.StockChart("chartContainer", {
+            exportEnabled: true,
+            theme: "light2",
+            title: {
+                text: "StockChart with Tooltip & Crosshair Syncing"
+            },
+            charts: [{
+                toolTip: {
+                    shared: true
+                },
+                axisX: {
+                    lineThickness: 5,
+                    tickLength: 0,
+                    labelFormatter: function (e) {
+                        return "";
+                    },
+                    crosshair: {
+                        enabled: true,
+                        snapToDataPoint: true,
+                        labelFormatter: function (e) {
+                            return ""
+                        }
+                    }
+                },
+                axisY2: {
+                    title: "Litecoin Price",
+                    prefix: "$"
+                },
+                legend: {
+                    verticalAlign: "top",
+                    horizontalAlign: "left"
+                },
+                data: [{
+                    name: "Price",
+                    yValueFormatString: "€#,###.##",
+                    axisYType: "secondary",
+                    type: "candlestick",
+                    risingColor: "green",
+                    fallingColor: "red",
+                    dataPoints: dataPoints1
+                }]
+            }
+                , {
+                height: 100,
+                toolTip: {
+                    shared: true
+                },
+                axisX: {
+                    crosshair: {
+                        enabled: true,
+                        snapToDataPoint: true
+                    }
+                },
+                axisY2: {
+                    prefix: "€",
+                    title: "LTC/EUR"
+                },
+                legend: {
+                    horizontalAlign: "left"
+                },
+                data: [{
+                    yValueFormatString: "€#,###.##",
+                    axisYType: "secondary",
+                    name: "LTC/EUR",
+                    dataPoints: dataPoints2
+                }]
+                }
+            ]
+            ,
+            navigator: {
+                data: [{
+                    color: "grey",
+                    dataPoints: dataPoints3
+                }],
+                slider: {
+                    minimum: new Date(2018, 06, 01),
+                    maximum: new Date(2018, 08, 01)
+                }
+            }
+        });
+
+        var model = @Html.Raw(Json.Encode(Model));
+
+        $.getJSON(model, function (data) {
+            for (var i = 0; i < data.length; i++) {
+                dataPoints1.push({ x: new Date(data[i].stockDate), y: [Number(data[i].openPrice), Number(data[i].highPrice), Number(data[i].lowPrice), Number(data[i].closePrice)], color: data[i].openPrice < data[i].closePrice ? "green" : "red" });
+                dataPoints2.push({ x: new Date(data[i].date), y: Number(data[i].volume_eur), color: data[i].open < data[i].close ? "green" : "red" });
+                dataPoints3.push({ x: new Date(data[i].stockDate), y: Number(data[i].closePrice) });
+            }
+            stockChart.render();
+        });
+    }*@
+</script>
+

@@ -1,0 +1,128 @@
+﻿@model chart0302.Models.stocks
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>stocks</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.stockID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stockID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stockName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stockName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numOfSharesTrade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numOfSharesTrade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numOfTrade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numOfTrade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.moneyOfDeal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.moneyOfDeal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.openPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.openPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.highPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.highPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lowPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lowPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.upDowm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.upDowm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.upDowmPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.upDowmPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stockDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stockDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

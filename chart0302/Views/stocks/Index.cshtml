@@ -1,0 +1,105 @@
+﻿@model IEnumerable<chart0302.Models.stocks>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.stockID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stockName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numOfSharesTrade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numOfTrade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.moneyOfDeal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.openPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.highPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lowPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.upDowm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.upDowmPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PER)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stockDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.stockID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stockName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.numOfSharesTrade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.numOfTrade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.moneyOfDeal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.openPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.highPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lowPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.endPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.upDowm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.upDowmPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PER)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stockDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_pk }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_pk }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_pk })
+        </td>
+    </tr>
+}
+
+</table>*@

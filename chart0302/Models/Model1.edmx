@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBstock2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="stocks">
+          <Key>
+            <PropertyRef Name="id_pk" />
+          </Key>
+          <Property Name="stockID" Type="char" MaxLength="4" />
+          <Property Name="stockName" Type="nvarchar" MaxLength="20" />
+          <Property Name="numOfSharesTrade" Type="varchar" MaxLength="15" />
+          <Property Name="numOfTrade" Type="varchar" MaxLength="15" />
+          <Property Name="moneyOfDeal" Type="varchar" MaxLength="15" />
+          <Property Name="openPrice" Type="varchar" MaxLength="10" />
+          <Property Name="highPrice" Type="varchar" MaxLength="10" />
+          <Property Name="lowPrice" Type="varchar" MaxLength="10" />
+          <Property Name="endPrice" Type="varchar" MaxLength="10" />
+          <Property Name="upDowm" Type="char" MaxLength="1" />
+          <Property Name="upDowmPrice" Type="varchar" MaxLength="10" />
+          <Property Name="PER" Type="varchar" MaxLength="10" />
+          <Property Name="stockDate" Type="char" MaxLength="8" />
+          <Property Name="id_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DBstock2StoreContainer">
+          <EntitySet Name="stocks" EntityType="Self.stocks" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBstock2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="stocks">
+          <Key>
+            <PropertyRef Name="id_pk" />
+          </Key>
+          <Property Name="stockID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="stockName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="numOfSharesTrade" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="numOfTrade" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="moneyOfDeal" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="openPrice" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="highPrice" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="lowPrice" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="endPrice" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="upDowm" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="upDowmPrice" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="stockDate" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="id_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityContainer Name="DB1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="stocks" EntityType="Self.stocks" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBstock2StoreContainer" CdmEntityContainer="DB1">
+          <EntitySetMapping Name="stocks">
+            <EntityTypeMapping TypeName="DBstock2.stocks">
+              <MappingFragment StoreEntitySet="stocks">
+                <ScalarProperty Name="stockID" ColumnName="stockID" />
+                <ScalarProperty Name="stockName" ColumnName="stockName" />
+                <ScalarProperty Name="numOfSharesTrade" ColumnName="numOfSharesTrade" />
+                <ScalarProperty Name="numOfTrade" ColumnName="numOfTrade" />
+                <ScalarProperty Name="moneyOfDeal" ColumnName="moneyOfDeal" />
+                <ScalarProperty Name="openPrice" ColumnName="openPrice" />
+                <ScalarProperty Name="highPrice" ColumnName="highPrice" />
+                <ScalarProperty Name="lowPrice" ColumnName="lowPrice" />
+                <ScalarProperty Name="endPrice" ColumnName="endPrice" />
+                <ScalarProperty Name="upDowm" ColumnName="upDowm" />
+                <ScalarProperty Name="upDowmPrice" ColumnName="upDowmPrice" />
+                <ScalarProperty Name="PER" ColumnName="PER" />
+                <ScalarProperty Name="stockDate" ColumnName="stockDate" />
+                <ScalarProperty Name="id_pk" ColumnName="id_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
