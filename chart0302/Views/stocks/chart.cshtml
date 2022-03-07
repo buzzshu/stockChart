@@ -8,6 +8,9 @@
     .con{
         width:500px;
     }
+    .canvasjs-chart-credit {
+        display: none !important;
+    }
 </style>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.stock.min.js"></script>
@@ -19,10 +22,11 @@
 
     @*<div id="chartContainer" style="height: 400px; width: 100%;"></div>*@
 
-<div class="con">
-    <canvas id="myChart"></canvas>
-</div>
-    
+    <div class="con">
+        <canvas id="myChart"></canvas>
+    </div>
+    <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+
 </body>
 <script type="text/javascript">
     var model = @Html.Raw(Json.Encode(Model));
@@ -30,7 +34,7 @@
     for (var i = 0; i < model.length; i++) {
         // stockPrice.push([i, model[i].endPrice])
         var date = model[i].stockDate.substring(0, 4) + "-" + model[i].stockDate.substring(4, 6) + "-" + model[i].stockDate.substring(6, 8);
-        stockPrice.push([new Date(date), model[i].endPrice])
+        stockPrice.push([new Date(date), model[i].endPrice]);
     }
 
     console.log(stockPrice)
@@ -66,102 +70,101 @@
         }
     });
 
-
-
-
-    @*window.onload = function () {
-        var dataPoints1 = [], dataPoints2 = [], dataPoints3 = [];
-        var stockChart = new CanvasJS.StockChart("chartContainer", {
-            exportEnabled: true,
-            theme: "light2",
-            title: {
-                text: "StockChart with Tooltip & Crosshair Syncing"
+    // plot2
+    var dataPoints1 = [], dataPoints2 = [], dataPoints3 = [];
+    
+    var stockChart = new CanvasJS.StockChart("chartContainer", {
+        exportEnabled: true,
+        theme: "light2",
+        title: {
+            text: "StockChart with Tooltip & Crosshair Syncing"
+        },
+        charts: [{
+            toolTip: {
+                shared: true
             },
-            charts: [{
-                toolTip: {
-                    shared: true
+            axisX: {
+                lineThickness: 5,
+                tickLength: 0,
+                labelFormatter: function (e) {
+                    return "";
                 },
-                axisX: {
-                    lineThickness: 5,
-                    tickLength: 0,
+                crosshair: {
+                    enabled: true,
+                    snapToDataPoint: true,
                     labelFormatter: function (e) {
-                        return "";
-                    },
-                    crosshair: {
-                        enabled: true,
-                        snapToDataPoint: true,
-                        labelFormatter: function (e) {
-                            return ""
-                        }
+                        return ""
                     }
-                },
-                axisY2: {
-                    title: "Litecoin Price",
-                    prefix: "$"
-                },
-                legend: {
-                    verticalAlign: "top",
-                    horizontalAlign: "left"
-                },
-                data: [{
-                    name: "Price",
-                    yValueFormatString: "€#,###.##",
-                    axisYType: "secondary",
-                    type: "candlestick",
-                    risingColor: "green",
-                    fallingColor: "red",
-                    dataPoints: dataPoints1
-                }]
-            }
-                , {
-                height: 100,
-                toolTip: {
-                    shared: true
-                },
-                axisX: {
-                    crosshair: {
-                        enabled: true,
-                        snapToDataPoint: true
-                    }
-                },
-                axisY2: {
-                    prefix: "€",
-                    title: "LTC/EUR"
-                },
-                legend: {
-                    horizontalAlign: "left"
-                },
-                data: [{
-                    yValueFormatString: "€#,###.##",
-                    axisYType: "secondary",
-                    name: "LTC/EUR",
-                    dataPoints: dataPoints2
-                }]
                 }
-            ]
-            ,
-            navigator: {
-                data: [{
-                    color: "grey",
-                    dataPoints: dataPoints3
-                }],
-                slider: {
-                    minimum: new Date(2018, 06, 01),
-                    maximum: new Date(2018, 08, 01)
+            },
+            axisY2: {
+                title: "Price",
+                prefix: "$"
+            },
+            legend: {
+                verticalAlign: "top",
+                horizontalAlign: "left"
+            },
+            data: [{
+                name: "Price",
+                yValueFormatString: "$#,###.##",
+                axisYType: "secondary",
+                type: "candlestick",
+                risingColor: "green",
+                fallingColor: "red",
+                dataPoints: dataPoints1
+            }]
+        }
+            , {
+            height: 100,
+            toolTip: {
+                shared: true
+            },
+            axisX: {
+                crosshair: {
+                    enabled: true,
+                    snapToDataPoint: true
                 }
+            },
+            axisY2: {
+                prefix: "$",
+                title: "VOLUME"
+            },
+            legend: {
+                horizontalAlign: "left"
+            },
+            data: [{
+                yValueFormatString: "$#,###.##",
+                axisYType: "secondary",
+                name: "VOLUME",
+                dataPoints: dataPoints2
+            }]
+        }
+        ]
+        ,
+        navigator: {
+            data: [{
+                color: "grey",
+                dataPoints: dataPoints3
+            }],
+            slider: {
+                minimum: new Date(2021, 01, 01),
+                maximum: new Date(2021, 12, 31)
             }
-        });
+        }
+    });
 
-        var model = @Html.Raw(Json.Encode(Model));
+    for (var i = 0; i < model.length; i++) {
 
-        $.getJSON(model, function (data) {
-            for (var i = 0; i < data.length; i++) {
-                dataPoints1.push({ x: new Date(data[i].stockDate), y: [Number(data[i].openPrice), Number(data[i].highPrice), Number(data[i].lowPrice), Number(data[i].closePrice)], color: data[i].openPrice < data[i].closePrice ? "green" : "red" });
-                dataPoints2.push({ x: new Date(data[i].date), y: Number(data[i].volume_eur), color: data[i].open < data[i].close ? "green" : "red" });
-                dataPoints3.push({ x: new Date(data[i].stockDate), y: Number(data[i].closePrice) });
-            }
-            stockChart.render();
-        });
-    }*@
+        var date = model[i].stockDate.substring(0, 4) + "-" + model[i].stockDate.substring(4, 6) + "-" + model[i].stockDate.substring(6, 8);
+        dataPoints1.push({ x: new Date(date), y: [Number(model[i].openPrice), Number(model[i].highPrice), Number(model[i].lowPrice), Number(model[i].endPrice)], color: model[i].openPrice < model[i].endPrice ? "green" : "red" });
+
+        // check 成交量?
+        dataPoints2.push({ x: new Date(date), y: Number(model[i].numOfTrade.replace("/,/g", "")), color: model[i].openPrice < model[i].endPrice ? "green" : "red" });
+
+        dataPoints3.push({ x: new Date(date), y: Number(model[i].endPrice) });
+    }
+    stockChart.render();
+
 </script>
 
