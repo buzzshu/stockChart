@@ -50,13 +50,38 @@ namespace chart0302.Controllers
 
         public ActionResult strategy(string str1)
         {
-            string id = "Empty";
-            if(str1 == "確認")
+            string id = "Strategy";
+            string stringID = "";
+            string stockArray =  "";
+            if (str1 == "確認")
             {
-                id = "2330";
+                //foreach (string s in db.stocks.Select(x => x.stockID).Distinct().OrderBy(x => x))
+                //{
+                //    var dbs = db.stocks.Where(x => x.stockID == s).ToList();
+                //    try
+                //    {
+                //        if (float.Parse(dbs.Where(x => x.stockDate == "20210409").Select(x => x.endPrice).ToList()[0]) > 900)
+                //        {
+                //            stringID = stringID + s + "\n";
+                //        }
+                //    }
+                //    catch
+                //    {
+                //    }
+                //}
+                stockArray += ", 1439";
+                stockArray += ", 2330";
             }
             ViewBag.id = id;
-            return View(db.stocks.Where(x => x.stockID == id).OrderBy(x => x.stockDate).ToList());
+            ViewBag.stringID = stringID;
+            if(stockArray == "")
+            {
+                return View();
+            }
+            else
+            {
+                return View(db.stocks.Where(x => stockArray.Contains(x.stockID)).OrderBy(x => x.stockDate).ToList());
+            }
         }
     }
 }

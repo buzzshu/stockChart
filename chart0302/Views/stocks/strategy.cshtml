@@ -4,46 +4,60 @@
     ViewBag.Title = ViewBag.id;
 }
 
-<h2>strategy</h2>
-
+<h2>Strategy</h2>
+<p>
+    @ViewBag.stringID
+</p>
 
 <form method="post">
     <input type="submit" value="確認" name="str1">
 </form>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{ int i = 0;}
-        @foreach (var item in Model)
+<hr />
+
+<div id="Info">
+    @*<input type="button" value="0050" onclick="location.href='@Url.Action("0050", "stocks/chart")'" />*@
+    @{
+        if (Model != null)
         {
-            i = i + 1;
-            <tr>
-                <td>@i</td>
-                <td>@Html.Encode(item.stockID)</td>
-                <td>@Html.Encode(item.stockName)</td>
-                <td>@Html.Encode(item.stockDate)</td>
-            </tr>
+            foreach (string s in Model.Select(x => x.stockID).Distinct().ToList())
+            {
+                <input type="button" value="@s" onclick="location.href='@Url.Action(s, "stocks/chart")'" />
+            }
         }
-    </tbody>
-</table>
 
-
-<script>
-    var model = @Html.Raw(Json.Encode(Model));
-    var stockPrice = [];
-    for (var i = 0; i < model.length; i++) {
-        // stockPrice.push([i, model[i].endPrice])
-        var date = model[i].stockDate.substring(0, 4) + "-" + model[i].stockDate.substring(4, 6) + "-" + model[i].stockDate.substring(6, 8);
-        stockPrice.push([new Date(date), model[i].endPrice]);
     }
+</div>
 
-    console.log(stockPrice)
-</script>
+
+@*@{
+    if (Model != null)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int i = 0;}
+                @foreach (var item in Model)
+                {
+                    i = i + 1;
+                    <tr>
+                        <td>@i</td>
+                        <td>@Html.Encode(item.stockID)</td>
+                        <td>@Html.Encode(item.stockName)</td>
+                        <td>@Html.Encode(item.stockDate)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}*@
+
+
+
