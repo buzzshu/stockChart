@@ -24,28 +24,31 @@ namespace chart0302.Controllers
 
         public ActionResult Chart(string id)
         {
-            ViewBag.id = id;
             if(id == null)
             {
                 return View("Index");
             }
             else
             {
-                return View(db.stocks.Where(x => x.stockID == id).OrderBy(x => x.stockDate).ToList());
+                var stock = db.stocks.Where(x => x.stockID == id).OrderBy(x => x.stockDate).ToList();
+                ViewBag.id = stock.First().stockName + "(" + stock.First().stockID + ")";
+                return View(stock);
             }
         }
 
         [HttpPost]
         public ActionResult Chart(string stockID, string id)
         {
-            ViewBag.id = stockID;
+
             if (stockID == "")
             {
                 return View("Index");
             }
             else
             {
-                return View(db.stocks.Where(x => x.stockID == stockID).OrderBy(x => x.stockDate).ToList());
+                var stock = db.stocks.Where(x => x.stockID == stockID || x.stockName == stockID).OrderBy(x => x.stockDate).ToList();
+                ViewBag.id = stock.First().stockName + "(" + stock.First().stockID + ")";
+                return View(stock);
             }
         }
 
@@ -103,6 +106,16 @@ namespace chart0302.Controllers
             {
                 return View(db.stocks.Where(x => stockArray.Contains(x.stockID)).OrderBy(x => x.stockDate).ToList());
             }
+        }
+
+        public ActionResult Customize()
+        {
+            return View();
+        }
+
+        public ActionResult StockMarketIndex()
+        {
+            return View();
         }
     }
 }

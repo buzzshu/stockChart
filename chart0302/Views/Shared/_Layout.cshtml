@@ -19,13 +19,19 @@
                 </button>
                 @*@Html.ActionLink("應用程式名稱", "Index", "stocks", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" float="right">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "stocks")</li>
                     <li>@Html.ActionLink("k線圖", "Chart", "stocks")</li>
                     <li>@Html.ActionLink("策略", "Strategy", "stocks")</li>
-                    @*<li>@Html.ActionLink("股票", "2330", "stocks/Chart")</li>*@
+                    <li>@Html.ActionLink("自訂", "Customize", "stocks")</li>
+                    <li>@Html.ActionLink("大盤", "StockMarketIndex", "stocks")</li>
+
                 </ul>
+                <div>
+                    <input type="text" id="stockID" placeholder="股票代號或名稱" onfocus="this.placeholder=' '" onblur="this.placeholder='股票代號或名稱'" />
+                    <button id="GoToChart">搜尋</button>
+                </div>
             </div>
         </div>
     </div>
@@ -40,5 +46,14 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        $("#GoToChart").click(function (e) {
+            e.preventDefault();
+            console.log("/stocks/Chart/" + $("#stockID").val());
+            window.location = "/stocks/Chart/" + $("#stockID").val();
+
+        });
+        
+    </script>
 </body>
 </html>
