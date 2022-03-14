@@ -19,56 +19,53 @@
 
 <body>
     <h2>@ViewBag.id</h2>
-
-    @*<div id="chartContainer" style="height: 400px; width: 100%;"></div>*@
-
-    <div class="con">
+    @*<div class="con">
         <canvas id="myChart"></canvas>
-    </div>
+    </div>*@
     <div id="chartContainer" style="height: 500px; width: 100%;"></div>
 
 </body>
 <script type="text/javascript">
     var model = @Html.Raw(Json.Encode(Model));
-    var stockPrice = [];
-    for (var i = 0; i < model.length; i++) {
-        // stockPrice.push([i, model[i].endPrice])
-        var date = model[i].stockDate.substring(0, 4) + "-" + model[i].stockDate.substring(4, 6) + "-" + model[i].stockDate.substring(6, 8);
-        stockPrice.push([new Date(date), model[i].endPrice]);
-    }
+    //var stockPrice = [];
+    //for (var i = 0; i < model.length; i++) {
+    //    // stockPrice.push([i, model[i].endPrice])
+    //    var date = model[i].stockDate.substring(0, 4) + "-" + model[i].stockDate.substring(4, 6) + "-" + model[i].stockDate.substring(6, 8);
+    //    stockPrice.push([new Date(date), model[i].endPrice]);
+    //}
 
-    console.log(stockPrice)
+    //console.log(stockPrice)
 
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'scatter',
-        data: {
-            datasets: [
-                {
-                    label: 'EndPrice',
-                    data: stockPrice,
-                    fill: false,
-                    borderColor: 'rgb(75, 192, 192)',
-                    // interpolate: true,
-                    lineTension: 0,
-                    showLine: true,
-                    pointRadius: 0
-                }
-            ]
-        },
-        options: {
-            scales: {
-                x: {
-                    ticks: {
-                        // Include a dollar sign in the ticks
-                        callback: function (label, index, labels) {
-                            return moment(label).format("YYYY/MM/DD");
-                        }
-                    }
-                }
-            }
-        }
-    });
+    //var ctx = document.getElementById("myChart");
+    //var myChart = new Chart(ctx, {
+    //    type: 'scatter',
+    //    data: {
+    //        datasets: [
+    //            {
+    //                label: 'EndPrice',
+    //                data: stockPrice,
+    //                fill: false,
+    //                borderColor: 'rgb(75, 192, 192)',
+    //                // interpolate: true,
+    //                lineTension: 0,
+    //                showLine: true,
+    //                pointRadius: 0
+    //            }
+    //        ]
+    //    },
+    //    options: {
+    //        scales: {
+    //            x: {
+    //                ticks: {
+    //                    // Include a dollar sign in the ticks
+    //                    callback: function (label, index, labels) {
+    //                        return moment(label).format("YYYY/MM/DD");
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //});
 
     // plot2
     var dataPoints1 = [], dataPoints2 = [], dataPoints3 = [];

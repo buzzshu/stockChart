@@ -10,20 +10,57 @@
 </p>
 
 <form method="post">
-    <input type="submit" value="確認" name="str1">
+    <input type="submit" value="策略一" name="str">
+    <input type="submit" value="策略二" name="str">
+    <input type="submit" value="策略三" name="str">
+    <input type="submit" value="策略四" name="str">
+    <input type="submit" value="策略五" name="str">
 </form>
 
 <hr />
 
 <div id="Info">
-    @*<input type="button" value="0050" onclick="location.href='@Url.Action("0050", "stocks/chart")'" />*@
     @{
         if (Model != null)
         {
-            foreach (string s in Model.Select(x => x.stockID).Distinct().ToList())
-            {
-                <input type="button" value="@s" onclick="location.href='@Url.Action(s, "stocks/chart")'" />
-            }
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>股票名稱</th>
+                        <th colspan="5" style="text-align:center;">今日資訊</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">股票代號</th>
+                        <th scope="col">收盤價</th>
+                        <th scope="col">漲跌</th>
+                        <th scope="col">漲跌%</th>
+                        <th scope="col">成交量</th>
+                        <th scope="col">本益比</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (string s in Model.Select(x => x.stockID).Distinct().ToList())
+                        {
+                            var item = Model.Where(x => x.stockID == s && x.stockDate == "20210104").ToList()[0];
+                            <tr>
+                                <td>
+                                    <input type="button" value="@item.stockName" onclick="location.href='@Url.Action(s, "stocks/chart")'" /><br />
+                                    <input type="button" value="@item.stockID" onclick="location.href='@Url.Action(s, "stocks/chart")'" />
+                                </td>
+                                <td>@Html.Encode(item.endPrice)</td>
+                                <td>@Html.Encode(item.upDowmPrice)</td>
+                                @{ float ratio = float.Parse(item.upDowmPrice) / float.Parse(item.openPrice);}
+                                <td>@ratio </td>
+                                <td>@Html.Encode(item.numOfSharesTrade)</td>
+                                <td>@Html.Encode(item.PER)</td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
         }
 
     }
