@@ -59,7 +59,7 @@ namespace chart0302.Controllers
             string stockArray =  "";
             switch (str)
             {
-                case "策略一":
+                case "成交爆大量":
                     //foreach (string s in db.stocks.Select(x => x.stockID).Distinct().OrderBy(x => x))
                     //{
                     //    var dbs = db.stocks.Where(x => x.stockID == s).ToList();
@@ -77,21 +77,33 @@ namespace chart0302.Controllers
                     stockArray += ", 2303";
                     stockArray += ", 2330";
                     break;
-                case "策略二":
+                case "四海遊龍":
                     stockArray += ", 0050";
                     stockArray += ", 2603";
                     break;
-                case "策略三":
+                case "強弱勢股":
                     stockArray += ", 2609";
                     stockArray += ", 2409";
                     break;
-                case "策略四":
+                case "外資連買":
                     stockArray += ", 2610";
                     stockArray += ", 2618";
                     break;
-                case "策略五":
+                case "投信連買":
                     stockArray += ", 3481";
                     stockArray += ", 2002";
+                    break;
+                case "KD黃金交叉":
+                    stockArray += ", 5608";
+                    stockArray += ", 8440";
+                    break;
+                case "EPS創新高":
+                    stockArray += ", 2883";
+                    stockArray += ", 2888";
+                    break;
+                case "營收由虧轉盈":
+                    stockArray += ", 3037";
+                    stockArray += ", 2371";
                     break;
                 default:
                     break;

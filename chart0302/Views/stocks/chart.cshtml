@@ -157,10 +157,11 @@
         dataPoints1.push({ x: new Date(date), y: [Number(model[i].openPrice), Number(model[i].highPrice), Number(model[i].lowPrice), Number(model[i].endPrice)], color: model[i].openPrice < model[i].endPrice ? "green" : "red" });
 
         // check 成交量?
-        dataPoints2.push({ x: new Date(date), y: Number(model[i].numOfTrade.replace("/,/g", "")), color: model[i].openPrice < model[i].endPrice ? "green" : "red" });
+        dataPoints2.push({ x: new Date(date), y: Number(model[i].numOfTrade.replace(/,/g, "")), color: model[i].openPrice < model[i].endPrice ? "green" : "red" });
 
         dataPoints3.push({ x: new Date(date), y: Number(model[i].endPrice) });
     }
+    console.log(dataPoints2);
     stockChart.render();
 
 </script>
