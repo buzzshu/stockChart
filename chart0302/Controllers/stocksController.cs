@@ -95,7 +95,7 @@ namespace chart0302.Controllers
                     break;
                 case "KD黃金交叉":
                     stockArray += ", 5608";
-                    stockArray += ", 8440";
+                    stockArray += ", 1439";
                     break;
                 case "EPS創新高":
                     stockArray += ", 2883";
